@@ -1,0 +1,38 @@
+[project]
+name = "ai-app"
+version = "0.1.0"
+requires-python = ">3.10"
+readme = "README.md"
+authors = [{ name = "mraad", email = "mraad@esri.com" }]
+
+dependencies = [
+    "jupyterlab>=4.1.5",
+    "ipywidgets",
+    "black",
+    "isort",
+    "jupyterlab_code_formatter",
+    "openai",
+    "pydantic",
+    "pypdf",
+    #"torch",
+    #"torchvision",
+    "pillow",
+    "types-Pillow",
+    "ollama",
+    "phidata>=2.3.62",
+    "pyspark==3.4.2",
+    "pandas",
+    "pyarrow",
+    "duckdb",
+    "chainlit",
+    "shapely>2.0",
+    "langchain",
+    "chromadb",
+    "qdrant-client",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]

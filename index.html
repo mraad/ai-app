@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+    <!--
+    nohup python -m http.server 8080 &> http.log &
+    -->
+    <meta charset="utf-8"/>
+    <title>Welcome to BDT</title>
+    <style>
+        html,
+        body,
+        #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.29/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.29/"></script>
+    <script src="http://localhost:8000/copilot/index.js"></script>
+    <script>
+        require(["esri/config", "esri/Map", "esri/views/MapView"], function (esriConfig, Map, MapView) {
+            // https://developers.arcgis.com/api-keys/
+            esriConfig.apiKey = "AAPKb8137b5467b24675b352939b01225f98TTygCOi_CtIhWqhY409_6sS9juXaifEkApatcAY1vhpW9VNn4-QIa1lNxJyRT2SV";
+            const map = new Map({
+                basemap: "arcgis/dark-gray" // basemap styles service
+            });
+
+            const view = new MapView({
+                map: map,
+                center: [-118.805, 34.027], // Longitude, latitude
+                zoom: 10, // Zoom level
+                container: "viewDiv" // Div element
+            });
+
+            window.addEventListener("chainlit-call-fn", (e) => {
+                const {name, args, callback} = e.detail;
+                if (name === "test") {
+                    console.log(name, args);
+                    callback("You sent: " + args.msg);
+                }
+            });
+            window.mountChainlitWidget({
+                chainlitServer: "http://localhost:8000",
+                theme: "dark",
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="viewDiv"></div>
+</body>
+</html>
